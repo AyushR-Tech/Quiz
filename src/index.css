@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 195 60% 96%;
+    --foreground: 200 80% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 80% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 80% 20%;
+
+    --primary: 190 70% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 195 50% 90%;
+    --secondary-foreground: 200 80% 20%;
+
+    --muted: 195 40% 92%;
+    --muted-foreground: 200 30% 45%;
+
+    --accent: 320 60% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 195 40% 85%;
+    --input: 195 40% 85%;
+    --ring: 190 70% 45%;
+
+    --radius: 1rem;
+
+    /* Custom quiz variables */
+    --quiz-gradient-start: 190 80% 70%;
+    --quiz-gradient-end: 320 50% 75%;
+    --quiz-title: 200 80% 25%;
+    --quiz-question-bg: 190 70% 55%;
+    --quiz-option-hover: 195 60% 95%;
+    
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 200 50% 8%;
+    --foreground: 195 40% 95%;
+
+    --card: 200 50% 12%;
+    --card-foreground: 195 40% 95%;
+
+    --popover: 200 50% 12%;
+    --popover-foreground: 195 40% 95%;
+
+    --primary: 190 70% 50%;
+    --primary-foreground: 200 50% 8%;
+
+    --secondary: 200 40% 20%;
+    --secondary-foreground: 195 40% 95%;
+
+    --muted: 200 40% 18%;
+    --muted-foreground: 195 30% 60%;
+
+    --accent: 320 60% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 200 40% 20%;
+    --input: 200 40% 20%;
+    --ring: 190 70% 50%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+}
+
+/* Quiz gradient background */
+.quiz-bg {
+  background: linear-gradient(
+    180deg,
+    hsl(190 80% 85%) 0%,
+    hsl(195 60% 92%) 50%,
+    hsl(200 50% 96%) 100%
+  );
+}
+
+/* Card gradient border */
+.quiz-card {
+  position: relative;
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+}
+
+.quiz-card::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: calc(var(--radius) + 3px);
+  background: linear-gradient(
+    135deg,
+    hsl(190 80% 70%) 0%,
+    hsl(200 60% 75%) 50%,
+    hsl(320 50% 75%) 100%
+  );
+  z-index: -1;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.quiz-card:hover::before {
+  opacity: 1;
+}
+
+/* Question header gradient */
+.question-header {
+  background: linear-gradient(
+    90deg,
+    hsl(190 70% 50%) 0%,
+    hsl(200 65% 55%) 100%
+  );
+}
+
+/* Animations */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(190 70% 50% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(190 70% 50% / 0.5);
+  }
+}
+
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.4s ease-out forwards;
+}
+
+.animate-slide-out {
+  animation: slide-out-left 0.3s ease-in forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: count-up 0.8s ease-out forwards;
+}
+
+/* Stagger animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* Option hover effect */
+.quiz-option {
+  transition: all 0.2s ease;
+}
+
+.quiz-option:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px hsl(190 70% 50% / 0.15);
+}
+
+.quiz-option.selected {
+  background: hsl(190 70% 95%);
+  border-color: hsl(190 70% 50%);
+}
